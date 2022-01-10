@@ -51,7 +51,7 @@ def index():
                 return jsonify(response)    
         except Exception as e:
             print(e)
-            error = {"error":"Something went wrong try agin"}
+            error = {"error":"Something went wrong try again"}
             error = {"error":e}
             return render_template("404.html",error = error)
         pass
