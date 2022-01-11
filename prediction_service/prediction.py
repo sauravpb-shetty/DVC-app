@@ -16,7 +16,7 @@ class NotInRange(Exception):
 class NotInCols(Exception):
     def __init__(self, message = "Not in columns"):
         self.message = message
-        super().__init__(self.messsage)        
+        super().__init__(self.message)        
 
 
 def read_params(config_path):
@@ -76,6 +76,16 @@ def api_response(dict_request):
             response = predict(data)
             response = {"response":response}
             return response
+
+    except NotInRange as e:
+        response = {"the_exected_range": get_schema(), "response": str(e) }
+        return response
+
+    except NotInCols as e:
+        response = {"the_exepected_cols": get_schema().keys(), "response": str(e) }
+        return response
+
+       
     except Exception as e:
         response = {"the_expected_range":get_schema(),"response":str(e)}
         return response         
